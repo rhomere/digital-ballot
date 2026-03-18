@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Digital Ballot Guide
 
-## Getting Started
+A UI-focused side project built with Next.js, Tailwind CSS, and Zustand to showcase complex, readable ballot interactions.
 
-First, run the development server:
+## What It Demonstrates
+
+- Large ballot reading experience with two modes:
+	- Scroll mode for long-form, full-ballot browsing
+	- Flip mode for one-contest-at-a-time navigation
+- Zustand state management for view mode, card position, and expandable prep notes
+- Strong visual hierarchy for offices, regions, candidate summaries, and proposition language
+- Responsive layout tuned for both mobile and desktop
+
+## Stack
+
+- Next.js 16 (App Router + TypeScript)
+- Tailwind CSS 4
+- Zustand
+
+## Local Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build Validation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+```
 
-## Learn More
+Both commands complete successfully in this workspace.
 
-To learn more about Next.js, take a look at the following resources:
+## Main Files
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `src/app/page.tsx`: Primary ballot UI and interactions
+- `src/data/ballotData.ts`: Sample ballot contests and candidate data
+- `src/store/ballotStore.ts`: Zustand state store
+- `src/app/globals.css`: Theme styles and motion

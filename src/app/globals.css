@@ -1,26 +1,307 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #d4d4d4;
+  --foreground: #0a0a0a;
+  --font-work-sans: "Avenir Next", "Trebuchet MS", "Lucida Grande", sans-serif;
+  --font-space-mono: Menlo, Consolas, "Courier New", monospace;
+  --font-fraunces: Baskerville, "Palatino Linotype", "Book Antiqua", serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-work-sans);
+  --font-mono: var(--font-space-mono);
+  --font-display: var(--font-fraunces);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-work-sans), sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.reveal-up {
+  animation: reveal-up 540ms ease-out both;
+}
+
+.ballot-page {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  border: 2px solid #000000;
+  background: #ffffff;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.16);
+}
+
+.ballot-side-rail {
+  border-right: 2px solid #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e5e5e5;
+}
+
+.ballot-side-rail p {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.17em;
+  font-weight: 800;
+  font-size: 0.8rem;
+  color: #111111;
+}
+
+.ballot-paper {
+  background: #ffffff;
+}
+
+.ballot-top-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.65rem;
+  border-bottom: 2px solid #000000;
+  background: #d4d4d4;
+  font-size: 0.72rem;
+  line-height: 1.25;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.ballot-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.ballot-code-block {
+  text-align: right;
+}
+
+.ballot-code {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.ballot-bars {
+  width: 80px;
+  height: 10px;
+  background: repeating-linear-gradient(
+    to right,
+    #111827 0,
+    #111827 2px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+.ballot-instructions {
+  border-bottom: 2px solid #000000;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.7rem;
+  line-height: 1.25;
+  background: #fafafa;
+}
+
+.ballot-instructions-title {
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.ballot-section-banner {
+  border-top: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  background: #cfcfcf;
+  color: #000000;
+  padding: 0.28rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.ballot-columns-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.42rem;
+  padding: 0.45rem;
+}
+
+.ballot-column {
+  min-width: 0;
+}
+
+.ballot-contest-box {
+  position: relative;
+  border: 2px solid #000000;
+  background: #ffffff;
+}
+
+.ballot-contest-header {
+  text-align: center;
+  border-bottom: 2px solid #000000;
+  background: #d4d4d4;
+  padding: 0.3rem 0.4rem;
+}
+
+.ballot-contest-header h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.05;
+}
+
+.ballot-contest-header p {
+  margin: 0;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.ballot-contest-body {
+  padding: 0.48rem;
+}
+
+.ballot-contest-region {
+  margin: 0;
+  font-size: 0.63rem;
+  text-transform: uppercase;
+  color: #1f2937;
+  font-weight: 700;
+}
+
+.ballot-time-tag {
+  margin: 0.1rem 0 0.2rem;
+  font-size: 0.58rem;
+  color: #4b5563;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.ballot-choice-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ballot-choice-row {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  align-items: start;
+  gap: 0.34rem;
+  margin: 0.2rem 0;
+}
+
+.ballot-oval {
+  display: inline-block;
+  width: 20px;
+  height: 10px;
+  border: 2px solid #000000;
+  border-radius: 999px;
+  margin-top: 0.16rem;
+}
+
+.ballot-choice-name {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.08;
+  font-weight: 700;
+}
+
+.ballot-choice-party {
+  margin: 0;
+  font-size: 0.66rem;
+  line-height: 1.08;
+  font-style: italic;
+  color: #374151;
+}
+
+.ballot-write-in {
+  margin: 0.28rem 0 0;
+  padding-top: 0.18rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.9);
+  font-size: 0.68rem;
+}
+
+.ballot-explainer-wrap {
+  margin-top: 0.3rem;
+}
+
+.ballot-explainer-toggle {
+  border: 1px solid #000000;
+  background: #f5f5f5;
+  padding: 0.12rem 0.3rem;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #111111;
+}
+
+.ballot-explainer-text {
+  margin: 0.2rem 0 0;
+  font-size: 0.64rem;
+  line-height: 1.25;
+  color: #1f2937;
+}
+
+.ballot-contest-number {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.35rem;
+  font-size: 0.54rem;
+  color: #111111;
+  font-weight: 700;
+}
+
+.ballot-footer-note {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  border-top: 2px solid #000000;
+  background: #d4d4d4;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.flip-card {
+  transform-origin: center;
+  animation: flip-in 280ms ease-out;
+}
+
+@media (min-width: 768px) {
+  .ballot-columns-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes flip-in {
+  from {
+    opacity: 0;
+    transform: perspective(900px) rotateX(-14deg) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: perspective(900px) rotateX(0deg) translateY(0);
+  }
 }
