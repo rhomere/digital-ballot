@@ -1,253 +1,84 @@
-"use client";
-
-import { ballotContests, type Contest } from "@/data/ballotData";
-import { useBallotStore } from "@/store/ballotStore";
-
-function BallotChoiceLine({
-  name,
-  party,
-}: {
-  name: string;
-  party?: string;
-}) {
-  return (
-    <li className="ballot-choice-row">
-      <span className="ballot-oval" aria-hidden="true" />
-      <div>
-        <p className="ballot-choice-name">{name}</p>
-        {party ? <p className="ballot-choice-party">{party}</p> : null}
-      </div>
-    </li>
-  );
-}
-
-function ContestBlock({
-  contest,
-  index,
-  showExplainer,
-}: {
-  contest: Contest;
-  index: number;
-  showExplainer: boolean;
-}) {
-  const expandedIds = useBallotStore((state) => state.expandedIds);
-  const toggleExpanded = useBallotStore((state) => state.toggleExpanded);
-  const isExpanded = !!expandedIds[contest.id];
-
-  return (
-    <section className="ballot-contest-box">
-      <header className="ballot-contest-header">
-        <h2>{contest.office}</h2>
-        <p>(You may vote for ONE)</p>
-      </header>
-
-      <div className="ballot-contest-body">
-        <p className="ballot-contest-region">{contest.region}</p>
-        <p className="ballot-time-tag">{contest.estimatedTime}</p>
-
-        <ul className="ballot-choice-list">
-          {contest.choices.map((choice) => (
-            <BallotChoiceLine
-              key={choice.id}
-              name={choice.name}
-              party={choice.party}
-            />
-          ))}
-        </ul>
-
-        <p className="ballot-write-in">Write-in:</p>
-
-        {showExplainer ? (
-          <div className="ballot-explainer-wrap">
-            <button
-              type="button"
-              onClick={() => toggleExpanded(contest.id)}
-              className="ballot-explainer-toggle"
-            >
-              {isExpanded ? "Hide plain-language note" : "Show plain-language note"}
-            </button>
-
-            {isExpanded ? (
-              <p className="ballot-explainer-text">
-                {contest.whyItMatters}
-              </p>
-            ) : null}
-          </div>
-        ) : null}
-      </div>
-      <span className="ballot-contest-number" aria-hidden="true">
-        {String(index + 1).padStart(2, "0")}
-      </span>
-    </section>
-  );
-}
-
-function BallotShell({ children }: { children: React.ReactNode }) {
-  return (
-    <section className="ballot-page reveal-up">
-      <aside className="ballot-side-rail">
-        <p>SAMPLE BALLOT</p>
-      </aside>
-
-      <div className="ballot-paper">
-        <header className="ballot-top-header">
-          <div>
-            <p className="ballot-title">Sample Ballot</p>
-            <p>Alexander County, North Carolina</p>
-            <p>November 5, 2024</p>
-          </div>
-          <div className="ballot-code-block">
-            <p className="ballot-code">B0001</p>
-            <div className="ballot-bars" aria-hidden="true" />
-          </div>
-        </header>
-
-        <section className="ballot-instructions">
-          <p className="ballot-instructions-title">Ballot Marking Instructions</p>
-          <p>A. Fill in the oval completely for your choice.</p>
-          <p>B. If authorized, write in a name and fill the write-in oval.</p>
-          <p>C. If you tear or mis-mark your ballot, request a replacement.</p>
-        </section>
-
-        <p className="ballot-section-banner">Partisan Elections</p>
-
-        {children}
-
-        <footer className="ballot-footer-note">
-          <span>Continue voting next side</span>
-          <span aria-hidden="true">-&gt;</span>
-        </footer>
-      </div>
-    </section>
-  );
-}
+import { BallotGuide } from "@/components/BallotGuide";
 
 export default function Home() {
-  const mode = useBallotStore((state) => state.mode);
-  const setMode = useBallotStore((state) => state.setMode);
-  const currentIndex = useBallotStore((state) => state.currentIndex);
-  const nextCard = useBallotStore((state) => state.nextCard);
-  const prevCard = useBallotStore((state) => state.prevCard);
-  const jumpTo = useBallotStore((state) => state.jumpTo);
-
-  const currentContest = ballotContests[currentIndex];
-  const columns = ballotContests.reduce<Contest[][]>(
-    (acc, contest, idx) => {
-      acc[idx % 3].push(contest);
-      return acc;
-    },
-    [[], [], []],
-  );
-
   return (
-    <div className="min-h-screen bg-[#d4d4d4] px-2 py-4 sm:px-4 sm:py-8">
-      <main className="mx-auto w-full max-w-[1100px]">
-        <section className="mb-3 flex flex-wrap items-center justify-between gap-3 border-2 border-black bg-[#e5e5e5] px-4 py-3">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black">
-              UI Showcase Mode
-            </p>
-            <h1 className="text-2xl leading-tight text-black sm:text-3xl">
-              Digital Ballot Guide
-            </h1>
+    <>
+      <main className="cover-shell">
+        <section className="cover-card" aria-label="Official sample ballot cover">
+          <div className="cover-top-strip" />
+
+          <div className="cover-stars" aria-hidden="true">
+            <span className="cover-star">★</span>
+            <span className="cover-star">★</span>
+            <span className="cover-star">★</span>
+            <span className="cover-star">★</span>
+            <span className="cover-star">★</span>
+            <span className="cover-star cover-star-large">★</span>
           </div>
 
-          <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              onClick={() => setMode("scroll")}
-              className={`border-2 px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] transition ${
-                mode === "scroll"
-                  ? "border-black bg-black text-white"
-                  : "border-black bg-white text-black hover:bg-neutral-100"
-              }`}
-            >
-              Scroll Ballot
-            </button>
-            <button
-              type="button"
-              onClick={() => setMode("flip")}
-              className={`border-2 px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] transition ${
-                mode === "flip"
-                  ? "border-black bg-black text-white"
-                  : "border-black bg-white text-black hover:bg-neutral-100"
-              }`}
-            >
-              Flip Ballot
-            </button>
-            <span className="self-center text-xs font-semibold uppercase tracking-[0.08em] text-black">
-              {ballotContests.length} contests
-            </span>
+          <div className="cover-wave-wrap" aria-hidden="true">
+            <div className="cover-wave-red" />
+            <div className="cover-wave-blue" />
           </div>
-        </section>
 
-        {mode === "scroll" ? (
-          <BallotShell>
-            <div className="ballot-columns-grid">
-              {columns.map((column, columnIndex) => (
-                <div key={columnIndex} className="ballot-column">
-                  {column.map((contest, contestIdx) => (
-                    <ContestBlock
-                      key={contest.id}
-                      contest={contest}
-                      index={columnIndex + contestIdx * 3}
-                      showExplainer
-                    />
-                  ))}
-                </div>
-              ))}
-            </div>
-          </BallotShell>
-        ) : (
-          <BallotShell>
-            <div className="mb-2 flex flex-wrap items-center justify-between gap-2 border-2 border-black bg-[#d4d4d4] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.06em] text-black">
-              <p>
-                Contest {currentIndex + 1} of {ballotContests.length}
-              </p>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => prevCard()}
-                  disabled={currentIndex === 0}
-                  className="border border-black bg-white px-2 py-1 disabled:opacity-40"
-                >
-                  Prev
-                </button>
-                <button
-                  type="button"
-                  onClick={() => nextCard(ballotContests.length)}
-                  disabled={currentIndex === ballotContests.length - 1}
-                  className="border border-black bg-white px-2 py-1 disabled:opacity-40"
-                >
-                  Next
-                </button>
+          <div className="cover-content">
+            <div className="cover-brand-line">
+              <div className="cover-vote-logo" aria-label="Your Voice Your Vote">
+                <p className="cover-vote-top">YOUR VOICE, YOUR</p>
+                <p className="cover-vote-main">VOTE</p>
+              </div>
+              <div className="cover-mdc-logo" aria-label="Miami-Dade County">
+                <p className="cover-mdc-main">MIAMI-DADE</p>
+                <p className="cover-mdc-sub">COUNTY</p>
               </div>
             </div>
 
-            <div className="flip-card ballot-column">
-              <ContestBlock
-                contest={currentContest}
-                index={currentIndex}
-                showExplainer
-              />
+            <p className="cover-dept-en">Miami-Dade County Elections Department</p>
+            <p className="cover-dept-es">Departamento de Elecciones del Condado de Miami-Dade</p>
+            <p className="cover-dept-ht">Depatman Eleksyon Konte Miami-Dade</p>
+
+            <div className="cover-divider" aria-hidden="true">
+              <span className="cover-divider-line" />
+              <span className="cover-divider-star">★</span>
+              <span className="cover-divider-line" />
             </div>
 
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {ballotContests.map((contest, index) => (
-                <button
-                  key={contest.id}
-                  type="button"
-                  onClick={() => jumpTo(index)}
-                  className={`h-2.5 w-6 rounded-full border border-black transition ${
-                    index === currentIndex ? "bg-black" : "bg-[#bdbdbd]"
-                  }`}
-                  aria-label={`Go to ${contest.office}`}
-                />
-              ))}
+            <h1 className="cover-title-en">Official Sample Ballot</h1>
+            <h2 className="cover-title-en">General Election</h2>
+            <h3 className="cover-title-en">Tuesday, November 5, 2024</h3>
+
+            <p className="cover-title-es">Boleta Oficial de Muestra</p>
+            <p className="cover-title-es">Elecciones Generales</p>
+            <p className="cover-title-es">Martes 5 de noviembre del 2024</p>
+
+            <p className="cover-title-ht">Echantiyon Bilten Vot Ofisyel</p>
+            <p className="cover-title-ht">Eleksyon Jeneral</p>
+            <p className="cover-title-ht">Madi 5 novanm 2024</p>
+
+            <div className="cover-social" aria-label="Social links">
+              <span className="cover-social-ico">f</span>
+              <span className="cover-social-ico">X</span>
+              <span className="cover-social-ico">ig</span>
+              <span className="cover-social-handle">@MDCElections</span>
             </div>
-          </BallotShell>
-        )}
+          </div>
+
+          <div className="cover-qr" aria-hidden="true" />
+
+          <footer className="cover-footer">
+            <p>For more information, visit www.miamidade.gov/elections or call 305-499-VOTE (8683).</p>
+            <p>For TTY, call 305-499-8480. To obtain this information in an accessible format, please call 305-499-8460.</p>
+            <p>Para mas informacion, visite www.miamidade.gov/elections o llame al 305-499-VOTE (8683).</p>
+            <p>Para servicios TTY (sigla en ingles) llame al 305-499-8480.</p>
+            <p>Pou plis enfomasyon, vizite www.miamidade.gov/elections oswa rele 305-499-VOTE (8683).</p>
+            <p>Pou TTY, rele 305-499-8480. Pou w jwenn enfomasyon sa yo nan yon foma aksesib, tanpri rele 305-499-8460.</p>
+          </footer>
+        </section>
       </main>
-    </div>
+      <section id="page-2" aria-label="Voter options page">
+        <BallotGuide />
+      </section>
+    </>
   );
 }
+
