@@ -2,12 +2,23 @@
 
 import { ballotContests, type Contest } from "@/data/ballotData";
 
-function ChoiceLine({ choice }: { choice: Contest["choices"][number] }) {
+function ChoiceLine({
+  choice,
+  contestId,
+}: {
+  choice: Contest["choices"][number];
+  contestId: string;
+}) {
   const isWriteIn = choice.name === "Write-in";
 
   return (
     <li className="sheet2-choice-row">
-      <span className="sheet2-oval" aria-hidden="true" />
+      <input
+        type="radio"
+        className="sheet2-radio"
+        name={`contest-${contestId}`}
+        aria-label={`Select ${choice.name}`}
+      />
       <div className="sheet2-choice-main">
         {isWriteIn ? (
           <>
@@ -44,7 +55,7 @@ function ContestCard({ contest }: { contest: Contest }) {
 
       <ul className="sheet2-choice-list">
         {contest.choices.map((choice) => (
-          <ChoiceLine key={choice.id} choice={choice} />
+          <ChoiceLine key={choice.id} choice={choice} contestId={contest.id} />
         ))}
       </ul>
     </article>

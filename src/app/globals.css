@@ -484,7 +484,7 @@ h3 {
 
 .sheet2-card-office {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.88rem;
   line-height: 1.08;
   font-weight: 700;
   text-transform: uppercase;
@@ -492,7 +492,7 @@ h3 {
 }
 
 .sheet2-votefor {
-  margin: 0.08rem 0 0.16rem;
+  margin: 0.2rem 0 0.34rem;
   font-size: 0.78rem;
   line-height: 1.05;
   font-weight: 700;
@@ -522,12 +522,21 @@ h3 {
   width: max-content;
 }
 
-.sheet2-oval {
-  width: 22px;
-  height: 13px;
-  border: 1px solid #6c6c6c;
+.sheet2-radio {
+  appearance: none;
+  width: 24px;
+  height: 14px;
+  margin-top: 0.12rem;
+  border: 1.5px solid #5e5e5e;
   border-radius: 999px;
-  margin-top: 0.18rem;
+  background: #ffffff;
+  cursor: pointer;
+  position: relative;
+}
+
+.sheet2-radio:checked {
+  background: #111111;
+  border-color: #111111;
 }
 
 .sheet2-choice-main {
@@ -631,7 +640,7 @@ h3 {
   }
 
   .sheet2-card-office {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 
   .sheet2-votefor {
@@ -642,9 +651,10 @@ h3 {
     grid-template-columns: 21px minmax(0, 20ch) auto;
   }
 
-  .sheet2-oval {
-    width: 19px;
+  .sheet2-radio {
+    width: 20px;
     height: 12px;
+    margin-top: 0.12rem;
   }
 
   .sheet2-choice-name {
