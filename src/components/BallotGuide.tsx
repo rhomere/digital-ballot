@@ -1,8 +1,14 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 import { ballotContests, type Contest } from "@/data/ballotData";
+
+function getJusticeName(contest: Contest) {
+  const match = contest.prompt?.match(/Justice\s+(.+?)\s+of/i);
+  return match?.[1] ?? contest.office;
+}
 
 function ChoiceLine({
   choice,
@@ -12,6 +18,8 @@ function ChoiceLine({
   contestId: string;
 }) {
   const isWriteIn = choice.name === "Write-in";
+  const canOpenInsights = !isWriteIn && Boolean(choice.party);
+  const insightsHref = `/insights?contest=${encodeURIComponent(contestId)}&choice=${encodeURIComponent(choice.id)}`;
 
   return (
     <li className="sheet2-choice-row">
@@ -30,7 +38,17 @@ function ChoiceLine({
           </>
         ) : (
           <>
-            <p className="sheet2-choice-name">{choice.name}</p>
+            {canOpenInsights ? (
+              <Link
+                href={insightsHref}
+                className="sheet2-choice-name sheet2-choice-link"
+                aria-label={`Open insights for ${choice.name}`}
+              >
+                {choice.name}
+              </Link>
+            ) : (
+              <p className="sheet2-choice-name">{choice.name}</p>
+            )}
             {choice.runningMate ? <p className="sheet2-running">{choice.runningMate}</p> : null}
           </>
         )}
@@ -75,11 +93,15 @@ function ContestCard({
         </div>
       ) : null}
       {contest.prompt ? (
-        <div className="sheet2-prompt-block">
+        <Link
+          href={`/insights?contest=${encodeURIComponent(contest.id)}&subject=${encodeURIComponent(getJusticeName(contest))}`}
+          className="sheet2-prompt-block sheet2-prompt-link"
+          aria-label={`Open insights for ${getJusticeName(contest)}`}
+        >
           <p className="sheet2-prompt">{contest.prompt}</p>
           <p className="sheet2-prompt red">{contest.spanishPrompt ?? contest.prompt}</p>
           <p className="sheet2-prompt blue">{contest.creolePrompt ?? contest.prompt}</p>
-        </div>
+        </Link>
       ) : (
         <p className="sheet2-votefor">
           <span>(Vote for {contest.voteFor})</span>

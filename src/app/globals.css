@@ -550,6 +550,23 @@ h3 {
   padding-left: 1.5rem;
 }
 
+.sheet2-prompt-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.sheet2-prompt-link:hover .sheet2-prompt,
+.sheet2-prompt-link:focus-visible .sheet2-prompt {
+  text-decoration: underline;
+}
+
+.sheet2-prompt-link:focus-visible {
+  outline: 2px solid #0f66b3;
+  outline-offset: 2px;
+}
+
 .sheet2-prompt {
   margin: 0;
   font-size: 0.88rem;
@@ -628,6 +645,20 @@ h3 {
 .sheet2-choice-name {
   font-size: 1.02rem;
   color: #111;
+}
+
+.sheet2-choice-link {
+  text-decoration: none;
+}
+
+.sheet2-choice-link:hover,
+.sheet2-choice-link:focus-visible {
+  text-decoration: underline;
+}
+
+.sheet2-choice-link:focus-visible {
+  outline: 2px solid #0f66b3;
+  outline-offset: 2px;
 }
 
 .sheet2-running {
@@ -772,6 +803,172 @@ h3 {
     position: static;
     display: block;
     margin-top: 0.1rem;
+  }
+}
+
+.insights-shell {
+  min-height: 100vh;
+  background: #dde4ea;
+  padding: 1rem 0.6rem 1.4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.insights-card {
+  width: min(920px, 100%);
+  background: #b7d6e8;
+  border: 1px solid #acc9d8;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.insights-top-strip {
+  height: 22px;
+  background: #0187ca;
+}
+
+.insights-header {
+  padding: 1.1rem 1rem 0.95rem;
+  text-align: center;
+  background:
+    radial-gradient(circle at 92% 18%, #ff1237 0 42px, transparent 43px),
+    radial-gradient(circle at 86% 20%, #0289cf 0 28px, transparent 29px),
+    #b7d6e8;
+  border-bottom: 2px solid #9dbfd0;
+}
+
+.insights-kicker,
+.insights-office,
+.insights-summary,
+.insights-header h1 {
+  margin: 0;
+}
+
+.insights-kicker {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #145479;
+}
+
+.insights-header h1 {
+  margin-top: 0.28rem;
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  line-height: 1.08;
+  color: #111111;
+  text-transform: uppercase;
+}
+
+.insights-office {
+  margin-top: 0.28rem;
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: #c52345;
+  text-transform: uppercase;
+}
+
+.insights-summary {
+  margin: 0.7rem auto 0;
+  max-width: 54ch;
+  font-size: 0.96rem;
+  line-height: 1.45;
+  color: #17384e;
+}
+
+.insights-body {
+  background: #ffffff;
+  padding: 1rem;
+}
+
+.insights-section + .insights-section {
+  margin-top: 1rem;
+}
+
+.insights-section h2 {
+  margin: 0;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid #d0dce4;
+  color: #0f4f83;
+  text-transform: uppercase;
+  font-size: 0.98rem;
+  letter-spacing: 0.02em;
+}
+
+.insights-list,
+.insights-financials {
+  list-style: none;
+  margin: 0.7rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.insights-list li {
+  position: relative;
+  padding-left: 0.95rem;
+  color: #1f1f1f;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.insights-list li::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  top: 0.14rem;
+  font-size: 0.56rem;
+  color: #d5325b;
+}
+
+.insights-financials li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #dfe8ef;
+  border-radius: 8px;
+  background: #f8fbff;
+  font-size: 0.94rem;
+  color: #1f1f1f;
+}
+
+.insights-financials strong {
+  color: #0f4f83;
+}
+
+.insights-back-link {
+  display: inline-block;
+  margin-top: 1.1rem;
+  color: #0f4f83;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.insights-back-link:hover,
+.insights-back-link:focus-visible {
+  text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+  .insights-header {
+    padding: 0.95rem 0.8rem 0.85rem;
+    background:
+      radial-gradient(circle at 94% 14%, #ff1237 0 28px, transparent 29px),
+      radial-gradient(circle at 88% 16%, #0289cf 0 18px, transparent 19px),
+      #b7d6e8;
+  }
+
+  .insights-summary,
+  .insights-list li,
+  .insights-financials li {
+    font-size: 0.86rem;
+  }
+
+  .insights-section h2 {
+    font-size: 0.88rem;
   }
 }
 
