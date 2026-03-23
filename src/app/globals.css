@@ -559,8 +559,10 @@ h3 {
 }
 
 .sheet2-info-modal p {
-  margin: 0.5rem 0 0;
-  font-size: 0.84rem;
+  margin: 1rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid #e3e3e3;
+  font-size: 1.1rem;
   line-height: 1.35;
   color: #222222;
   text-align: center;
