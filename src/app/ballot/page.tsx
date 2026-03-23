@@ -1,5 +1,5 @@
-import { BallotGuide } from "@/components/BallotGuide";
+import { BallotPages } from "@/components/BallotPages";
 
 export default function BallotPage() {
-  return <BallotGuide />;
+  return <BallotPages />;
 }
