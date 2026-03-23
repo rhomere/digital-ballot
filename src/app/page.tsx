@@ -16,11 +16,6 @@ export default function Home() {
             <span className="cover-star cover-star-large">★</span>
           </div>
 
-          <div className="cover-wave-wrap" aria-hidden="true">
-            <div className="cover-wave-red" />
-            <div className="cover-wave-blue" />
-          </div>
-
           <div className="cover-content">
             <div className="cover-brand-line">
               <div className="cover-vote-logo" aria-label="Your Voice Your Vote">

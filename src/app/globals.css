@@ -76,34 +76,6 @@ h3 {
   margin-top: 0;
 }
 
-.cover-wave-wrap {
-  position: absolute;
-  top: 22px;
-  right: -8px;
-  bottom: 114px;
-  width: 184px;
-  z-index: 1;
-}
-
-.cover-wave-red,
-.cover-wave-blue {
-  position: absolute;
-  right: 0;
-  height: 100%;
-  border-radius: 52% 48% 53% 47% / 18% 20% 24% 22%;
-}
-
-.cover-wave-red {
-  width: 122px;
-  background: #ff1237;
-}
-
-.cover-wave-blue {
-  width: 76px;
-  right: 38px;
-  background: #0289cf;
-}
-
 .cover-content {
   position: relative;
   z-index: 3;
@@ -317,20 +289,6 @@ h3 {
     font-size: 112px;
   }
 
-  .cover-wave-wrap {
-    width: 96px;
-    right: -12px;
-  }
-
-  .cover-wave-red {
-    width: 70px;
-  }
-
-  .cover-wave-blue {
-    width: 40px;
-    right: 16px;
-  }
-
   .cover-content {
     margin-left: 70px;
     margin-right: 56px;
@@ -361,7 +319,8 @@ h3 {
   .cover-dept-en,
   .cover-dept-es,
   .cover-dept-ht {
-    font-size: clamp(17px, 4vw, 25px);
+    font-size: clamp(12px, 2.6vw, 18px);
+    text-align: center;
   }
 
   .cover-title-en,
