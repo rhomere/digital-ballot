@@ -13,7 +13,6 @@ https://digital-ballot-gray.vercel.app/
 
 - Next.js 16 (App Router + TypeScript)
 - Tailwind CSS 4
-- Zustand
 
 ## Local Development
 
