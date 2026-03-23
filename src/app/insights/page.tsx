@@ -1,10 +1,14 @@
-"use client";
-
 import Link from "next/link";
-import { useMemo } from "react";
-import { useSearchParams } from "next/navigation";
 
 import { ballotContests } from "@/data/ballotData";
+
+type InsightsPageProps = {
+  searchParams: Promise<{
+    contest?: string;
+    choice?: string;
+    subject?: string;
+  }>;
+};
 
 type FinancialItem = {
   label: string;
@@ -52,24 +56,18 @@ function getJusticeName(prompt?: string, fallback?: string) {
   return match?.[1] ?? fallback ?? "Candidate";
 }
 
-export default function InsightsPage() {
-  const searchParams = useSearchParams();
-  const contestId = searchParams.get("contest");
-  const choiceId = searchParams.get("choice");
-  const subject = searchParams.get("subject");
+export default async function InsightsPage({ searchParams }: InsightsPageProps) {
+  const { contest: contestId, choice: choiceId, subject } = await searchParams;
 
-  const details = useMemo(() => {
-    const contest = ballotContests.find((item) => item.id === contestId);
-    const choice = contest?.choices.find((item) => item.id === choiceId);
-    const title = choice?.name ?? subject ?? getJusticeName(contest?.prompt, contest?.office);
-    const seed = `${contest?.id ?? "unknown"}:${choice?.id ?? title}`;
-
-    return {
-      contest,
-      title,
-      profile: buildInsightProfile(seed),
-    };
-  }, [choiceId, contestId, subject]);
+  const contest = ballotContests.find((item) => item.id === contestId);
+  const choice = contest?.choices.find((item) => item.id === choiceId);
+  const title = choice?.name ?? subject ?? getJusticeName(contest?.prompt, contest?.office);
+  const seed = `${contest?.id ?? "unknown"}:${choice?.id ?? title}`;
+  const details = {
+    contest,
+    title,
+    profile: buildInsightProfile(seed),
+  };
 
   if (!details.contest) {
     return (
