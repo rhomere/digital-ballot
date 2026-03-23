@@ -41,17 +41,39 @@ function ChoiceLine({
   );
 }
 
-function ContestCard({ contest }: { contest: Contest }) {
+function ContestCard({
+  contest,
+  showOfficeTitles,
+}: {
+  contest: Contest;
+  showOfficeTitles: boolean;
+}) {
   return (
     <article className="sheet2-card">
-      <p className="sheet2-card-office">{contest.office.toUpperCase()}</p>
-      <p className="sheet2-card-office red">{contest.office.toUpperCase()}</p>
-      <p className="sheet2-card-office blue">{contest.office.toUpperCase()}</p>
-      <p className="sheet2-votefor">
-        <span>(Vote for {contest.voteFor})</span>
-        <span className="red">(Vote por {contest.voteFor})</span>
-        <span className="blue">(Vote pou {contest.voteFor})</span>
-      </p>
+      {showOfficeTitles ? (
+        <>
+          <p className="sheet2-card-office">{contest.office.toUpperCase()}</p>
+          <p className="sheet2-card-office red">
+            {(contest.spanishOffice ?? contest.office).toUpperCase()}
+          </p>
+          <p className="sheet2-card-office blue">
+            {(contest.creoleOffice ?? contest.office).toUpperCase()}
+          </p>
+        </>
+      ) : null}
+      {contest.prompt ? (
+        <div className="sheet2-prompt-block">
+          <p className="sheet2-prompt">{contest.prompt}</p>
+          <p className="sheet2-prompt red">{contest.spanishPrompt ?? contest.prompt}</p>
+          <p className="sheet2-prompt blue">{contest.creolePrompt ?? contest.prompt}</p>
+        </div>
+      ) : (
+        <p className="sheet2-votefor">
+          <span>(Vote for {contest.voteFor})</span>
+          <span className="red">(Vote por {contest.voteFor})</span>
+          <span className="blue">(Vote pou {contest.voteFor})</span>
+        </p>
+      )}
 
       <ul className="sheet2-choice-list">
         {contest.choices.map((choice) => (
@@ -88,9 +110,23 @@ export function BallotGuide() {
         <div className="sheet2-grid">
           {columns.map((column, colIndex) => (
             <div className="sheet2-col" key={`col-${colIndex}`}>
-              {column.map((contest) => (
-                <ContestCard key={contest.id} contest={contest} />
-              ))}
+              {column.map((contest, contestIndex) => {
+                const previousContest = column[contestIndex - 1];
+                const showOfficeTitles =
+                  !previousContest ||
+                  previousContest.section !== contest.section ||
+                  previousContest.office !== contest.office ||
+                  previousContest.spanishOffice !== contest.spanishOffice ||
+                  previousContest.creoleOffice !== contest.creoleOffice;
+
+                return (
+                  <ContestCard
+                    key={contest.id}
+                    contest={contest}
+                    showOfficeTitles={showOfficeTitles}
+                  />
+                );
+              })}
             </div>
           ))}
         </div>

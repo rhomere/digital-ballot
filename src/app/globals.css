@@ -40,7 +40,7 @@ h3 {
 
 .cover-card {
   position: relative;
-  width: min(800px, 100%);
+  width: min(980px, 100%);
   aspect-ratio: 800 / 766;
   background: #b7d6e8;
   border: 1px solid #acc9d8;
@@ -137,25 +137,25 @@ h3 {
 }
 
 .cover-vote-top {
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.03em;
 }
 
 .cover-vote-main {
   margin-top: 1px;
-  font-size: 60px;
+  font-size: 56px;
   letter-spacing: 0.03em;
 }
 
 .cover-mdc-main {
-  font-size: 32px;
+  font-size: 30px;
   letter-spacing: 0.01em;
 }
 
 .cover-mdc-sub {
   display: inline-block;
   margin-top: 1px;
-  font-size: 24px;
+  font-size: 22px;
   border-top: 2px solid #111111;
   padding-top: 2px;
 }
@@ -171,21 +171,21 @@ h3 {
 
 .cover-dept-en {
   margin-top: 12px;
-  font-size: 48px;
+  font-size: 44px;
   color: #111111;
   font-weight: 700;
   line-height: 1.1;
 }
 
 .cover-dept-es {
-  font-size: 45px;
+  font-size: 42px;
   color: #f02137;
   font-weight: 700;
   line-height: 1.1;
 }
 
 .cover-dept-ht {
-  font-size: 45px;
+  font-size: 42px;
   color: #007ec8;
   font-weight: 700;
   line-height: 1.1;
@@ -214,28 +214,31 @@ h3 {
 
 .cover-title-en {
   color: #111111;
-  font-size: 53px;
+  font-size: 49px;
   line-height: 1.04;
   font-weight: 700;
 }
 
 .cover-title-es {
   color: #f02137;
-  font-size: 53px;
+  font-size: 49px;
   line-height: 1.04;
   font-weight: 700;
 }
 
 .cover-title-ht {
   color: #007ec8;
-  font-size: 53px;
+  font-size: 49px;
   line-height: 1.04;
   font-weight: 700;
 }
 
-.cover-title-es:first-of-type,
-.cover-title-ht:first-of-type {
-  margin-top: 10px;
+.cover-title-es-first {
+  margin-top: 22px;
+}
+
+.cover-title-ht-first {
+  margin-top: 12px;
 }
 
 .cover-social {
@@ -260,7 +263,7 @@ h3 {
 }
 
 .cover-social-handle {
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 700;
   margin-left: 8px;
 }
@@ -292,7 +295,7 @@ h3 {
 
 .cover-footer p {
   margin: 0;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.14;
   font-weight: 700;
 }
@@ -340,32 +343,32 @@ h3 {
   }
 
   .cover-vote-top {
-    font-size: 9px;
+    font-size: 8px;
   }
 
   .cover-vote-main {
-    font-size: clamp(24px, 5.6vw, 40px);
+    font-size: clamp(22px, 5.2vw, 36px);
   }
 
   .cover-mdc-main {
-    font-size: clamp(14px, 3.4vw, 24px);
+    font-size: clamp(13px, 3.1vw, 22px);
   }
 
   .cover-mdc-sub {
-    font-size: clamp(11px, 2.7vw, 17px);
+    font-size: clamp(10px, 2.4vw, 15px);
     border-top-width: 1px;
   }
 
   .cover-dept-en,
   .cover-dept-es,
   .cover-dept-ht {
-    font-size: clamp(18px, 4.3vw, 32px);
+    font-size: clamp(17px, 4vw, 25px);
   }
 
   .cover-title-en,
   .cover-title-es,
   .cover-title-ht {
-    font-size: clamp(24px, 6vw, 42px);
+    font-size: clamp(22px, 5.6vw, 30px);
   }
 
   .cover-social-ico {
@@ -375,7 +378,7 @@ h3 {
   }
 
   .cover-social-handle {
-    font-size: clamp(16px, 4.3vw, 30px);
+    font-size: clamp(15px, 4vw, 27px);
   }
 
   .cover-qr {
@@ -387,7 +390,7 @@ h3 {
   }
 
   .cover-footer p {
-    font-size: clamp(8px, 1.9vw, 13px);
+    font-size: clamp(8px, 1.7vw, 12px);
   }
 }
 
@@ -431,21 +434,23 @@ h3 {
 }
 
 .sheet2-header-row {
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.24rem;
+  white-space: nowrap;
 }
 
 .sheet2-header-star {
   color: #262626;
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1;
 }
 
 .sheet2-header .red,
 .sheet2-votefor .red,
 .sheet2-card-office.red,
+.sheet2-prompt.red,
 .sheet2-choice-alt.red {
   color: #ec1c2f;
 }
@@ -453,6 +458,7 @@ h3 {
 .sheet2-header .blue,
 .sheet2-votefor .blue,
 .sheet2-card-office.blue,
+.sheet2-prompt.blue,
 .sheet2-choice-alt.blue {
   color: #0086d0;
 }
@@ -489,6 +495,25 @@ h3 {
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
+}
+
+.sheet2-prompt-block {
+  margin: 0.22rem 0 0.34rem;
+  padding-left: 0.34rem;
+}
+
+.sheet2-prompt {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.08;
+  font-weight: 700;
+  color: #000000;
+  text-align: left;
+  white-space: pre-line;
+}
+
+.sheet2-prompt + .sheet2-prompt {
+  margin-top: 0.04rem;
 }
 
 .sheet2-votefor {
@@ -528,7 +553,7 @@ h3 {
   height: 14px;
   margin-top: 0.12rem;
   border: 1.5px solid #5e5e5e;
-  border-radius: 999px;
+  border-radius: 6px;
   background: #ffffff;
   cursor: pointer;
   position: relative;
@@ -636,7 +661,7 @@ h3 {
   }
 
   .sheet2-header-row {
-    font-size: 0.9rem;
+    font-size: 0.82rem;
   }
 
   .sheet2-card-office {
@@ -682,6 +707,7 @@ h3 {
   .sheet2-header-row {
     display: block;
     line-height: 1.2;
+    white-space: normal;
   }
 
   .sheet2-header-star {

@@ -47,11 +47,11 @@ export default function Home() {
             <h2 className="cover-title-en">General Election</h2>
             <h3 className="cover-title-en">Tuesday, November 5, 2024</h3>
 
-            <p className="cover-title-es">Boleta Oficial de Muestra</p>
+            <p className="cover-title-es cover-title-es-first">Boleta Oficial de Muestra</p>
             <p className="cover-title-es">Elecciones Generales</p>
             <p className="cover-title-es">Martes 5 de noviembre del 2024</p>
 
-            <p className="cover-title-ht">Echantiyon Bilten Vot Ofisyel</p>
+            <p className="cover-title-ht cover-title-ht-first">Echantiyon Bilten Vot Ofisyel</p>
             <p className="cover-title-ht">Eleksyon Jeneral</p>
             <p className="cover-title-ht">Madi 5 novanm 2024</p>
 
