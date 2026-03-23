@@ -1,6 +1,6 @@
 # Digital Ballot Guide
 
-A UI-focused side project built with Next.js, Tailwind CSS, and Zustand to showcase complex, readable ballot interactions.
+A UI-focused side project built with Next.js, Tailwind CSS, to help citizens understand their ballots.
 
 ## What It Demonstrates
 
@@ -10,6 +10,9 @@ A UI-focused side project built with Next.js, Tailwind CSS, and Zustand to showc
 - Zustand state management for view mode, card position, and expandable prep notes
 - Strong visual hierarchy for offices, regions, candidate summaries, and proposition language
 - Responsive layout tuned for both mobile and desktop
+
+## Deployed to 
+https://digital-ballot-gray.vercel.app/
 
 ## Stack
 
