@@ -4,12 +4,7 @@ A UI-focused side project built with Next.js, Tailwind CSS, to help citizens und
 
 ## What It Demonstrates
 
-- Large ballot reading experience with two modes:
-	- Scroll mode for long-form, full-ballot browsing
-	- Flip mode for one-contest-at-a-time navigation
-- Zustand state management for view mode, card position, and expandable prep notes
-- Strong visual hierarchy for offices, regions, candidate summaries, and proposition language
-- Responsive layout tuned for both mobile and desktop
+-
 
 ## Deployed to 
 https://digital-ballot-gray.vercel.app/
