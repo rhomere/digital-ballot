@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { ballotContests, type Contest } from "@/data/ballotData";
 
 function ChoiceLine({
@@ -44,14 +46,16 @@ function ChoiceLine({
 function ContestCard({
   contest,
   showOfficeTitles,
+  onInfoClick,
 }: {
   contest: Contest;
   showOfficeTitles: boolean;
+  onInfoClick: (contest: Contest) => void;
 }) {
   return (
     <article className="sheet2-card">
       {showOfficeTitles ? (
-        <>
+        <div className="sheet2-card-office-group">
           <p className="sheet2-card-office">{contest.office.toUpperCase()}</p>
           <p className="sheet2-card-office red">
             {(contest.spanishOffice ?? contest.office).toUpperCase()}
@@ -59,7 +63,16 @@ function ContestCard({
           <p className="sheet2-card-office blue">
             {(contest.creoleOffice ?? contest.office).toUpperCase()}
           </p>
-        </>
+          <button
+            type="button"
+            className="sheet2-info-symbol"
+            title="Contest information"
+            aria-label={`Open information for ${contest.office}`}
+            onClick={() => onInfoClick(contest)}
+          >
+            i
+          </button>
+        </div>
       ) : null}
       {contest.prompt ? (
         <div className="sheet2-prompt-block">
@@ -85,10 +98,20 @@ function ContestCard({
 }
 
 export function BallotGuide() {
+  const [activeInfoContest, setActiveInfoContest] = useState<Contest | null>(null);
+
   const topSections = ["partisan", "judicial"] as const;
   const allContests = topSections.flatMap((section) =>
     ballotContests.filter((contest) => contest.section === section),
   );
+
+  const handleOpenInfo = (contest: Contest) => {
+    setActiveInfoContest(contest);
+  };
+
+  const handleCloseInfo = () => {
+    setActiveInfoContest(null);
+  };
 
   const contestsPerColumn = Math.ceil(allContests.length / 2);
   const columns: Contest[][] = Array.from({ length: 2 }, (_, index) =>
@@ -124,12 +147,44 @@ export function BallotGuide() {
                     key={contest.id}
                     contest={contest}
                     showOfficeTitles={showOfficeTitles}
+                    onInfoClick={handleOpenInfo}
                   />
                 );
               })}
             </div>
           ))}
         </div>
+
+        {activeInfoContest ? (
+          <div
+            className="sheet2-info-modal-backdrop"
+            role="presentation"
+            onClick={handleCloseInfo}
+          >
+            <div
+              className="sheet2-info-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="sheet2-info-modal-title"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <button
+                type="button"
+                className="sheet2-info-modal-close-x"
+                aria-label="Close information dialog"
+                onClick={handleCloseInfo}
+              >
+                X
+              </button>
+              <h3 id="sheet2-info-modal-title">
+                {activeInfoContest.office}
+              </h3>
+              <p>
+                {activeInfoContest.whyItMatters ?? "Information is not available for this contest yet."}
+              </p>
+            </div>
+          </div>
+        ) : null}
 
         <footer className="sheet2-footer">
           <span className="sheet2-page-num">2</span>
