@@ -41,7 +41,6 @@ h3 {
 .cover-card {
   position: relative;
   width: min(980px, 100%);
-  aspect-ratio: 800 / 766;
   background: #b7d6e8;
   border: 1px solid #acc9d8;
   overflow: hidden;
@@ -171,24 +170,24 @@ h3 {
 
 .cover-dept-en {
   margin-top: 12px;
-  font-size: 44px;
   color: #111111;
-  font-weight: 700;
-  line-height: 1.1;
 }
 
 .cover-dept-es {
-  font-size: 42px;
   color: #f02137;
-  font-weight: 700;
-  line-height: 1.1;
 }
 
 .cover-dept-ht {
-  font-size: 42px;
   color: #007ec8;
+}
+
+.cover-dept-en,
+.cover-dept-es,
+.cover-dept-ht {
+  font-size: clamp(20px, 3vw, 27px);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.12;
+  white-space: nowrap;
 }
 
 .cover-divider {
